@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #c96;
+  --color-primary-dark: #b8865a;
+  --color-secondary: #333;
+  --color-text: #666;
+  --color-text-light: #999;
+  --color-border: #ebebeb;
+  --color-bg-light: #fafafa;
+  --color-white: #fff;
+  --color-dark: #222;
+  --font-sans: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #666;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.86;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.product-card:hover .product-action {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card:hover .product-img img {
+  transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f4f4f4 25%, #e8e8e8 50%, #f4f4f4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.page-enter {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.loader-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #ebebeb;
+  border-top-color: #c96;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.loader-spinner-sm {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn-pulse:hover {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(204, 153, 102, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(204, 153, 102, 0); }
+}
