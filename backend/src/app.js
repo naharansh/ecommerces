@@ -9,7 +9,20 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: config.frontendUrl, credentials: true }));
+const allowedOrigins = config.frontendUrl
+  ? config.frontendUrl.split(',').map((s) => s.trim())
+  : ['http://localhost:3000'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
