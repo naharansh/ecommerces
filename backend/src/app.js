@@ -9,16 +9,21 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 
 app.use(helmet());
-const allowedOrigins = config.frontendUrl
+const defaultOrigins = [
+  'http://localhost:3000',
+  'https://ecommerces-1-z30s.onrender.com',
+];
+const envOrigins = config.frontendUrl
   ? config.frontendUrl.split(',').map((s) => s.trim())
-  : ['http://localhost:3000'];
+  : [];
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
 
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(null, false);
     }
   },
   credentials: true,
